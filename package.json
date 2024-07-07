@@ -1,0 +1,19 @@
+{
+  "name": "toy_troopers_webapp",
+  "version": "1.0.0",
+  "description": "web app for toy troopers to manage database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rutwik-Kikani/Toy_Troopers_WEBAPP.git"
+  },
+  "author": "RK, PM, NM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rutwik-Kikani/Toy_Troopers_WEBAPP/issues"
+  },
+  "homepage": "https://github.com/Rutwik-Kikani/Toy_Troopers_WEBAPP#readme"
+}
