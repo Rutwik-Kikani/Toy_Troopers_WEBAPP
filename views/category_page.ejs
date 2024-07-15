@@ -1,0 +1,33 @@
+<div class="category-form">
+  <h2>Add new Category</h2>
+  <img id="imagePreview" src="https://placehold.jp/150x150.png" alt="Image Preview" style="width: 150px; height: 150px" />
+  <form id="categoryForm" action="/category" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <input type="text" id="categoryName" name="categoryName" required />
+    </div>
+    <div class="form-group">
+      <label for="categoryImage">Category Image:</label>
+      <input type="file" id="categoryImage" name="categoryImage" required onchange="previewImage()" />
+    </div>
+    <button type="submit">Add Category</button>
+  </form>
+</div>
+
+<div class="category-list">
+  <h2>Existing Categories</h2>
+  <ul>
+    <% if (categories && categories.length) { %> <% categories.forEach(function(category) { %>
+    <li id="category-<%= category.id %>">
+      <img src="<%= category.categoryImageURL %>" alt="<%= category.categoryName %>" style="width: 100px; height: 100px" />
+      <span><%= category.categoryName %></span>
+      <button onclick="loadCategory('<%= category.id %>', '<%= category.categoryName %>', '<%= category.categoryImageURL %>')">Update</button>
+      <button onclick="deleteCategory('<%= category.id %>')">Delete</button>
+    </li>
+    <% }); %> <% } else { %>
+    <li>No categories found.</li>
+    <% } %>
+  </ul>
+</div>
+
+<script src="./js/category_page_script.js"></script>

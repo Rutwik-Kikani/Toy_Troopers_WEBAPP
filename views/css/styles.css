@@ -1,49 +1,316 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --cream: #dad7d7;
+  --green: #04aa6d;
+  --gray: #555;
+  --light-gray: #f0f0f0;
+  --blue: #007bff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
 }
 
-.header-container {
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* Prevent body scroll */
+}
+
+.super-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+.main-content {
+  display: grid;
+  grid-template-columns: 12% 88%;
+  overflow: hidden; /* Prevent main-content scroll */
+}
+.content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
+  background-color: #ffffff;
+  overflow: hidden; /* Ensure only list container scrolls */
 }
-
-.main-container {
-  display: flex;
-}
-
 .sidebar {
-  width: 200px;
-  background-color: #444;
-  color: #fff;
-  padding: 1rem;
-  height: 90vh;
+  background-color: var(--cream);
+  overflow: auto;
+  border-right: 2px solid var(--gray);
 }
+.products-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden; /* Prevent parent container scroll */
+}
+/* ------------------------product-form------------------------------ */
+.product-form {
+  flex: 0 0 30%; /* Ensure form doesn't shrink or grow */
+  margin-right: 1rem; /* Add some space between form and list */
+  background-color: var(--light-gray);
+  padding: 1rem;
+  border-right: 2px solid var(--gray);
+  overflow-y: auto; /* Enable vertical scrolling for the form */
+}
+.product-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--black);
+  font-weight: bold;
+}
+.product-form input[type="text"],
+.product-form input[type="number"],
+.product-form select,
+.product-form textarea,
+.product-form input[type="file"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.product-form textarea {
+  height: 150px;
+}
+#remove-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px; /* Add some space between image and button */
+  padding: 5px 10px; /* Add some padding for better appearance */
+  border-radius: 4px; /* Optional: rounded corners */
+}
+.imagePreviewContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: 150px;
+  margin-bottom: 1rem;
+  background-color: var(--cream);
+}
+.img-container {
+  display: inline-block;
+  position: relative;
+  margin: 5px;
+  text-align: center; /* Center the button */
+}
+.preview-img {
+  width: 100px;
+  height: 100px; /* Adjust the size as needed */
+  display: block;
+  margin: 0 auto; /* Center the image */
+}
+.product-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--green);
+  color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.product-form button:hover {
+  background-color: var(--gray);
+}
+
+/* ---------------------------product list container------------------------ */
+.products-list-container {
+  flex: 1 1 70%; /* Allow list container to grow and take the remaining 70% */
+  overflow-y: auto; /* Enable vertical scrolling for the list */
+  background-color: var(--white);
+  padding: 1rem;
+}
+#searchInput {
+  display: block;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+}
+.products-list-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.product-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--light-gray);
+}
+.product-item:last-child {
+  border-bottom: none;
+}
+.product-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+.product-item div {
+  display: flex;
+  flex-direction: column;
+}
+.product-item h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: var(--black);
+}
+.product-item p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--black);
+}
+.product-item button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--green);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+.product-item button:hover {
+  background-color: var(--gray);
+}
+/* ------------------------------------------------------------------- */
+.category-form {
+  flex: 0 0 30%; /* Ensure form doesn't shrink or grow */
+  margin-right: 1rem; /* Add some space between form and list */
+  background-color: var(--light-gray);
+  padding: 1rem;
+  border-right: 2px solid var(--gray);
+}
+.category-form h2 {
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+.category-form .form-group {
+  margin-bottom: 1rem;
+}
+.category-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--black);
+  font-weight: bold;
+}
+.category-form input[type="text"],
+.category-form input[type="file"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.category-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--green);
+  color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.category-form button:hover {
+  background-color: var(--gray);
+}
+
+/* ---------------------------------------------------------------------- */
+.category-list {
+  flex: 1 1 70%; /* Allow list container to grow and take the remaining 70% */
+  overflow-y: auto; /* Enable vertical scrolling for the list */
+  background-color: var(--white);
+  padding: 1rem;
+}
+.category-list h2 {
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+.category-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.category-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--light-gray);
+}
+.category-list li:last-child {
+  border-bottom: none;
+}
+.category-list img {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+.category-list span {
+  flex: 1;
+  font-size: 1rem;
+  color: var(--black);
+}
+.category-list button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--green);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 0.5rem;
+}
+.category-list button:hover {
+  background-color: var(--gray);
+}
+
+/* ---------------------------------------------------------------------- */
 
 .sidebar ul {
   list-style-type: none;
+  margin: 0;
   padding: 0;
+  width: 100%;
 }
-.sidebar ul li {
-  margin: 1rem 0;
+.sidebar a {
+  display: block;
+  color: var(--black);
+  padding: 8px 16px;
+  text-decoration: none;
 }
-.content {
-  flex: 1;
-  padding: 1rem;
+.sidebar li a.active {
+  background-color: var(--green);
+  color: var(--white);
 }
-
+.sidebar li a:hover:not(.active) {
+  background-color: var(--gray);
+  color: var(--white);
+}
+/* ---------------------------------------------------------------------- */
 .footer-container {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--gray);
+  color: var(--white);
   text-align: center;
   padding: 1rem;
-  position: absolute;
-  bottom: 0;
+  width: 100%;
+}
+.header-container {
+  background-color: var(--gray);
+  color: var(--white);
+  text-align: start;
+  padding: 1rem;
   width: 100%;
 }

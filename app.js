@@ -2,7 +2,8 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const express = require('express');
 const morgan = require('morgan');
-const path = require('path')
+const path = require('path');
+const routes = require('./routes/indexRoutes');
 
 dotenv.config();
 const app = express();
@@ -16,10 +17,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 
-app.get('/', (req, res) => {
-    res.render('index.ejs');
-
-});
+app.use('/', routes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

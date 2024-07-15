@@ -8,16 +8,33 @@
   </head>
 
   <body>
-    <%- include('partials/header') %>
-    <div class="main-container">
-      <%- include('partials/sidebar') %>
+    <div class="super-container">
+      <header class="header-container">
+        <div class="logo">Logo of app</div>
+      </header>
+      <!-- ------------------------------------------------------- -->
+      <div class="main-content">
+        <div class="sidebar">
+          <nav>
+            <ul>
+              <li><a href="/category" class="<%= content === 'category_page' ? 'active' : '' %>">Category</a></li>
+              <li><a href="/products" class="<%= content === 'products_page' ? 'active' : '' %>">Products</a></li>
+              <li><a href="/users">User</a></li>
+            </ul>
+          </nav>
+        </div>
 
-      <div class="content">
-        <h1>Content Displayer</h1>
-        <%- content %>
-        <!-- Your dynamic content goes here -->
+        <div class="content">
+          <% if (content === 'category_page') { %> <%- include('category_page') %> <% } else if (content === 'products_page') { %> <%- include('products_page')
+          %> <% } else { %>
+          <p><%= content %></p>
+          <% } %>
+        </div>
       </div>
+      <!-- ------------------------------------------------------- -->
+      <footer class="footer-container">
+        <p>&copy; 2024 My App</p>
+      </footer>
     </div>
-    <%- include('partials/footer') %>
   </body>
 </html>
