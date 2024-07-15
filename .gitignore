@@ -2,7 +2,7 @@
 node_modules/
 npm-debug.log
 yarn-error.log
-
+config/firebase-admin-key
 # Logs
 logs/
 *.log
