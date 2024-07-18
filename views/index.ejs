@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link href="/public/css/styles.css" rel="stylesheet" type="text/css" />
     <title>Toy Troppers</title>
   </head>
 
@@ -18,7 +18,11 @@
           <nav>
             <ul>
               <li><a href="/category" class="<%= content === 'category_page' ? 'active' : '' %>">Category</a></li>
-              <li><a href="/products" class="<%= content === 'products_page' ? 'active' : '' %>">Products</a></li>
+              <li>
+                <a href="/products" class="<%= content === 'products_page' || content === 'product_details_page' ? 'active' : '' %>">
+                  <%= content === 'product_details_page' ? 'Product' : 'Products' %>
+                </a>
+              </li>
               <li><a href="/users">User</a></li>
             </ul>
           </nav>
@@ -26,7 +30,7 @@
 
         <div class="content">
           <% if (content === 'category_page') { %> <%- include('category_page') %> <% } else if (content === 'products_page') { %> <%- include('products_page')
-          %> <% } else { %>
+          %> <% } else if (content === 'product_details_page') { %> <%- include('product_details_page') %> <% } else { %>
           <p><%= content %></p>
           <% } %>
         </div>

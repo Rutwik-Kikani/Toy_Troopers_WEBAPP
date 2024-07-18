@@ -4,6 +4,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 const categoryController = require('../controllers/categoryController');
 const productsController = require('../controllers/productsController');
+const productDetailController = require('../controllers/productDetailController');
 
 const router = express.Router();
 
@@ -19,8 +20,10 @@ router.delete('/delete-category/:id', categoryController.deleteCategory);
 
 router.get('/products', productsController.displayProductsPage);
 router.post('/products', upload.array('productImages', 5), productsController.addNewProduct);
-//working on it
+router.get('/products/:productId', productsController.getProductById);
 router.post('/products/update-product/:productId', upload.array('productImages', 5), productsController.updateProduct);
+router.delete('/delete-image', productsController.deleteImage);
+router.delete('/delete-product/:productId', productsController.deleteProduct);
 
-
+router.get('/product-details/:productId', productDetailController.displayProductDetails);
 module.exports = router;

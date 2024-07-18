@@ -1,31 +1,37 @@
 <div class="products-container">
   <!-- form -->
   <div class="product-form">
+    <h2 id="formTitle">Add New Product</h2>
     <form id="productForm" action="/products" method="POST" enctype="multipart/form-data">
-      <label for="productName">Product Name:</label>
-      <input type="text" id="productName" name="name" required />
-
-      <label for="productDescription">Description:</label>
-      <textarea id="productDescription" name="description" required></textarea>
-
-      <label for="productPrice">Price:</label>
-      <input type="number" id="productPrice" name="price" required />
-
-      <label for="productCategory">Category:</label>
-      <select id="productCategory" name="categoryId" required>
-        <% categories.forEach(function(category) { %>
-        <option value="<%= category.id %>"><%= category.categoryName %></option>
-        <% }); %>
-      </select>
-
-      <label for="productStockQuantity">Stock Quantity:</label>
-      <input type="number" id="productStockQuantity" name="stockQuantity" required />
-
-      <label for="productImages">Upload Images:</label>
-      <input type="file" id="productImages" name="productImages" accept="image/*" onchange="previewImages();" />
-
-      <div id="imagePreviewContainer" class="imagePreviewContainer"></div>
-
+      <div class="form-group">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="productCategory">Category:</label>
+        <select id="productCategory" name="categoryId" required>
+          <% categories.forEach(function(category) { %>
+          <option value="<%= category.id %>"><%= category.categoryName %></option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="productDescription">Description:</label>
+        <textarea id="productDescription" name="description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Price:</label>
+        <input type="number" id="productPrice" name="price" step="0.01" required />
+      </div>
+      <div class="form-group">
+        <label for="productStockQuantity">Stock Quantity:</label>
+        <input type="number" id="productStockQuantity" name="stockQuantity" required />
+      </div>
+      <div class="form-group">
+        <label for="productImages">Upload Images:</label>
+        <input type="file" id="productImages" name="productImages" accept="image/*" onchange="previewImages();" />
+        <div id="imagePreviewContainer" class="imagePreviewContainer"></div>
+      </div>
       <button type="submit">Add Product</button>
     </form>
   </div>
@@ -46,9 +52,9 @@
           <p>Stock: <%= product.stockQuantity %></p>
         </div>
         <div>
-          <button onclick="">Update</button>
-          <button onclick="">Delete</button>
-          <button onclick="">Details</button>
+          <button onclick="loadProduct('<%= product.id %>')">Update</button>
+          <button onclick="deleteProduct('<%= product.id %>')">Delete</button>
+          <button onclick="location.href='/product-details/<%= product.id %>'">Details</button>
         </div>
       </li>
       <% }); %> <% if (products.length === 0 ) { %>
@@ -58,4 +64,4 @@
   </div>
 </div>
 
-<script src="./js/products_page_script.js"></script>
+<script src="/public/js/products_page_script.js"></script>

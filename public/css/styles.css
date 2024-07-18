@@ -46,7 +46,12 @@ body {
   flex: 1;
   overflow: hidden; /* Prevent parent container scroll */
 }
-/* ------------------------product-form------------------------------ */
+.pr-details-container {
+  overflow-y: auto;
+  flex: auto;
+}
+/* ------------------------product-form / category-form------------------------------ */
+.category-form,
 .product-form {
   flex: 0 0 30%; /* Ensure form doesn't shrink or grow */
   margin-right: 1rem; /* Add some space between form and list */
@@ -55,12 +60,24 @@ body {
   border-right: 2px solid var(--gray);
   overflow-y: auto; /* Enable vertical scrolling for the form */
 }
+.product-form .form-group,
+.category-form .form-group {
+  margin-bottom: 1rem;
+}
+.product-form h2,
+.category-form h2 {
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+.category-form label,
 .product-form label {
   display: block;
   margin-bottom: 0.5rem;
   color: var(--black);
   font-weight: bold;
 }
+.category-form input[type="text"],
+.category-form input[type="file"],
 .product-form input[type="text"],
 .product-form input[type="number"],
 .product-form select,
@@ -71,10 +88,25 @@ body {
   border: 1px solid var(--gray);
   border-radius: 4px;
   font-size: 1rem;
-  margin-bottom: 1rem;
 }
 .product-form textarea {
   height: 150px;
+}
+.category-form button,
+.product-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--green);
+  color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.category-form button:hover,
+.product-form button:hover {
+  background-color: var(--gray);
 }
 #remove-btn {
   background-color: red;
@@ -91,6 +123,7 @@ body {
   justify-content: space-evenly;
   min-height: 150px;
   margin-bottom: 1rem;
+  margin-top: 1rem;
   background-color: var(--cream);
 }
 .img-container {
@@ -99,28 +132,13 @@ body {
   margin: 5px;
   text-align: center; /* Center the button */
 }
-.preview-img {
+.pre-img {
   width: 100px;
   height: 100px; /* Adjust the size as needed */
   display: block;
   margin: 0 auto; /* Center the image */
 }
-.product-form button {
-  width: 100%;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--green);
-  color: var(--white);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.product-form button:hover {
-  background-color: var(--gray);
-}
-
-/* ---------------------------product list container------------------------ */
+/* --------------------------- product list container ------------------------ */
 .products-list-container {
   flex: 1 1 70%; /* Allow list container to grow and take the remaining 70% */
   overflow-y: auto; /* Enable vertical scrolling for the list */
@@ -182,51 +200,7 @@ body {
 .product-item button:hover {
   background-color: var(--gray);
 }
-/* ------------------------------------------------------------------- */
-.category-form {
-  flex: 0 0 30%; /* Ensure form doesn't shrink or grow */
-  margin-right: 1rem; /* Add some space between form and list */
-  background-color: var(--light-gray);
-  padding: 1rem;
-  border-right: 2px solid var(--gray);
-}
-.category-form h2 {
-  margin-bottom: 1rem;
-  color: var(--black);
-}
-.category-form .form-group {
-  margin-bottom: 1rem;
-}
-.category-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--black);
-  font-weight: bold;
-}
-.category-form input[type="text"],
-.category-form input[type="file"] {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid var(--gray);
-  border-radius: 4px;
-  font-size: 1rem;
-}
-.category-form button {
-  width: 100%;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--green);
-  color: var(--white);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.category-form button:hover {
-  background-color: var(--gray);
-}
-
-/* ---------------------------------------------------------------------- */
+/* ------------------------------ category list container ---------------------------------------- */
 .category-list {
   flex: 1 1 70%; /* Allow list container to grow and take the remaining 70% */
   overflow-y: auto; /* Enable vertical scrolling for the list */

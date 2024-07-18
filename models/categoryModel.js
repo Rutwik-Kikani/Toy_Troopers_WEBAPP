@@ -143,5 +143,9 @@ const deleteCategory = async (categoryId) => {
         throw new Error('Failed to delete and rearrange categories');
     }
 };
-
-module.exports = { addCategory, getAllCategories, updateCategory, deleteCategory };
+const getCategoryNameById = async (categoryId) => {
+    const categorySnapshot = await db.ref(`categories/${categoryId}`).once('value');
+    const categoryData = categorySnapshot.val();
+    return categoryData ? categoryData.categoryName : 'Unknown Category';
+};
+module.exports = { addCategory, getAllCategories, updateCategory, deleteCategory, getCategoryNameById };

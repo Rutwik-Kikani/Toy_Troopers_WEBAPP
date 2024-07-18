@@ -1,0 +1,26 @@
+<div class="pr-details-container">
+  <h1><%= product.name %></h1>
+  <div class="product-details">
+    <img src="<%= product.imageUrl %>" alt="<%= product.name %>" style="width: 200px; height: 200px" />
+    <p><strong>Category:</strong> <%= product.categoryName %></p>
+    <p><strong>Description:</strong> <%= product.description %></p>
+    <p><strong>Price:</strong> $<%= product.price %></p>
+    <p><strong>Stock Quantity:</strong> <%= product.stockQuantity %></p>
+  </div>
+  <div class="product-reviews">
+    <h2 id="titles">Reviews</h2>
+    <% if (reviews && reviews.length) { %>
+    <ul>
+      <% reviews.forEach(function(review) { %>
+      <li>
+        <p><strong>Reviewer:</strong> <%= review.userName %></p>
+        <p><strong>Rating:</strong> <%= review.rating %>/5</p>
+        <p><strong>Comment:</strong> <%= review.comment %></p>
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No reviews available.</p>
+    <% } %>
+  </div>
+</div>

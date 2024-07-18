@@ -22,7 +22,6 @@ function loadCategory(id, name, imageUrl) {
     document.getElementById("categoryForm").querySelector('button[type="submit"]').textContent = "Update Category"; // Change button text to "Update"
     document.querySelector(".category-form h2").innerHTML = "Update the Category";
 }
-
 function deleteCategory(categoryId) {
     if (confirm("Are you sure you want to delete this category?")) {
         fetch("/delete-category/" + categoryId, {
