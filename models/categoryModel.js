@@ -1,5 +1,6 @@
 const { db, storage } = require("../config/firebase");
 
+// helper function
 function createImageFilename(categoryName) {
     // Replace spaces with underscores and convert to lowercase
     const safeName = categoryName.replace(/\s+/g, '_').toLowerCase();
@@ -117,7 +118,6 @@ const rearrangeCategories = async (deletedCategoryId) => {
     // Write the updates with new keys
     await categoriesRef.update(updates);
 };
-
 const deleteCategory = async (categoryId) => {
     try {
         const categoryRef = db.ref('categories/' + categoryId);
@@ -143,9 +143,11 @@ const deleteCategory = async (categoryId) => {
         throw new Error('Failed to delete and rearrange categories');
     }
 };
+
 const getCategoryNameById = async (categoryId) => {
     const categorySnapshot = await db.ref(`categories/${categoryId}`).once('value');
     const categoryData = categorySnapshot.val();
     return categoryData ? categoryData.categoryName : 'Unknown Category';
 };
+
 module.exports = { addCategory, getAllCategories, updateCategory, deleteCategory, getCategoryNameById };

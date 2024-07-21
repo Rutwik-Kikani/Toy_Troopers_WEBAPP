@@ -163,5 +163,28 @@ const deleteProduct = async (productId) => {
     await db.ref('products').set(updatedProducts);
 };
 
+const filterProducts = async (categoryId, minPrice, maxPrice, minRating) => {
+    const productSnapshot = await db.ref('products').once('value');
+    const products = productSnapshot.val() || {};
 
-module.exports = { getAllProducts, addProduct, getProductById, updateProduct, deleteImage, deleteProduct };
+    const reviewSnapshot = await db.ref('reviews').once('value');
+    const reviews = reviewSnapshot.val() || {};
+
+    const filteredProducts = Object.keys(products).map(key => ({
+        id: key,
+        ...products[key]
+    })).filter(product => {
+        const productReviews = Object.keys(product.reviews || {}).map(reviewId => reviews[reviewId]).filter(Boolean);
+        const averageRating = productReviews.reduce((acc, review) => acc + review.rating, 0) / (productReviews.length || 1);
+
+        return (
+            (categoryId ? product.categoryId === categoryId : true) &&
+            (product.price >= minPrice && product.price <= maxPrice) &&
+            (averageRating >= minRating)
+        );
+    });
+
+    return filteredProducts;
+};
+
+module.exports = { filterProducts, getAllProducts, addProduct, getProductById, updateProduct, deleteImage, deleteProduct, uploadImage };

@@ -150,38 +150,17 @@ function deleteProduct(productId) {
 }
 
 function filterProducts() {
-    clearTimeout(timeout); // Clear the previous timeout
+    const input = document.getElementById("searchInput");
+    const filter = input.value.toLowerCase();
+    const productList = document.getElementById("productList");
+    const products = productList.getElementsByClassName("product-item");
 
-    // Set a new timeout
-    timeout = setTimeout(() => {
-        var input = document.getElementById("searchInput");
-        var filter = input.value.toLowerCase();
-        var nodes = document.getElementById("productList").getElementsByTagName("li");
-        let visibleCount = 0; // Counter for visible products
-
-        for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i].dataset.name.includes(filter)) {
-                nodes[i].style.display = "block";
-                visibleCount++; // Increment count if product is visible
-            } else {
-                nodes[i].style.display = "none";
-            }
-        }
-
-        // Display or hide the 'No products found' message based on visibleCount
-        const noProductsMessage = document.getElementById("noProductsMessage");
-        if (visibleCount === 0) {
-            if (!noProductsMessage) {
-                // Create and append the message if it doesn't exist
-                const message = document.createElement("li");
-                message.id = "noProductsMessage";
-                message.textContent = "No products found.";
-                document.getElementById("productList").appendChild(message);
-            } else {
-                noProductsMessage.style.display = "flex"; // Just show the existing message
-            }
+    Array.from(products).forEach(function (product) {
+        const name = product.getAttribute("data-name");
+        if (name.includes(filter)) {
+            product.style.display = "";
         } else {
-            noProductsMessage.style.display = "none";
+            product.style.display = "none";
         }
-    }, 1000); // Delay of 1 second
+    });
 }

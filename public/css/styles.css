@@ -41,6 +41,7 @@ body {
   overflow: auto;
   border-right: 2px solid var(--gray);
 }
+.customer-products-container,
 .products-container {
   display: flex;
   flex: 1;
@@ -50,7 +51,8 @@ body {
   overflow-y: auto;
   flex: auto;
 }
-/* ------------------------product-form / category-form------------------------------ */
+/* ------------------------product-form / category-form / customer-filter-form ------------------------------ */
+.customer-filter-form,
 .category-form,
 .product-form {
   flex: 0 0 30%; /* Ensure form doesn't shrink or grow */
@@ -60,15 +62,18 @@ body {
   border-right: 2px solid var(--gray);
   overflow-y: auto; /* Enable vertical scrolling for the form */
 }
+.customer-filter-form .form-group,
 .product-form .form-group,
 .category-form .form-group {
   margin-bottom: 1rem;
 }
+.customer-filter-form h2,
 .product-form h2,
 .category-form h2 {
   margin-bottom: 1rem;
   color: var(--black);
 }
+.customer-filter-form label,
 .category-form label,
 .product-form label {
   display: block;
@@ -81,6 +86,7 @@ body {
 .product-form input[type="text"],
 .product-form input[type="number"],
 .product-form select,
+.customer-filter-form select,
 .product-form textarea,
 .product-form input[type="file"] {
   width: 100%;
@@ -92,6 +98,7 @@ body {
 .product-form textarea {
   height: 150px;
 }
+.customer-filter-form button,
 .category-form button,
 .product-form button {
   width: 100%;
@@ -104,6 +111,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.customer-filter-form button:hover,
 .category-form button:hover,
 .product-form button:hover {
   background-color: var(--gray);
@@ -282,9 +290,17 @@ body {
   width: 100%;
 }
 .header-container {
+  display: flex;
+  justify-content: space-between;
   background-color: var(--gray);
   color: var(--white);
   text-align: start;
   padding: 1rem;
   width: 100%;
+}
+.header-container a {
+  display: block;
+  color: var(--white);
+  padding: 8px 16px;
+  text-decoration: none;
 }

@@ -1,21 +1,24 @@
 const productModel = require('../models/productsModel');
 const categoryModel = require('../models/categoryModel');
 
-const displayProductsPage = async (req, res) => {
+const displayProductsPage = async (req, res, contentType) => {
 
     try {
         const products = await productModel.getAllProducts();
         const categories = await categoryModel.getAllCategories();
         res.render('index', {
-            content: 'products_page',
+            content: contentType,
             products: products,
             categories: categories,
+            user: req.session.user,
         });
     } catch (error) {
-        console.error("Error adding category: ", error);
-        res.status(500).send('Error adding category');
+        console.error("Error fetching data: ", error);
+        res.status(500).send('Error fetching data');
     }
 };
+const displayAdminProductsPage = (req, res) => displayProductsPage(req, res, 'products_page');
+const displayCustomerProductsPage = (req, res) => displayProductsPage(req, res, 'customer_products_page');
 
 const getProductById = async (req, res) => {
     try {
@@ -64,7 +67,7 @@ const updateProduct = async (req, res) => {
         // Combine new uploaded images with existing ones
         if (req.files && req.files.length > 0) {
             for (let i = 0; i < req.files.length; i++) {
-                const imageUrl = await uploadImage(req.files[i], productData.name);
+                const imageUrl = await productModel.uploadImage(req.files[i], productData.name);
                 currentProductImages[`imageUrl${Object.keys(currentProductImages).length + 1}`] = imageUrl;
             }
         }
@@ -106,4 +109,25 @@ const deleteProduct = async (req, res) => {
     }
 }
 
-module.exports = { displayProductsPage, addNewProduct, updateProduct, getProductById, deleteImage, deleteProduct };
+const filterProducts = async (req, res) => {
+    try {
+        const { categoryId, priceRange, rating } = req.body;
+        const [minPrice, maxPrice] = priceRange ? priceRange.split('-').map(Number) : [0, Infinity];
+        const minRating = rating ? Number(rating) : 0;
+
+        const filteredProducts = await productModel.filterProducts(categoryId, minPrice, maxPrice, minRating);
+
+        res.render('index', {
+            content: 'customer_products_page',
+            products: filteredProducts,
+            categories: await categoryModel.getAllCategories(),
+            user: req.session.user,
+        });
+    } catch (error) {
+        console.error("Error filtering products: ", error);
+        res.status(500).send('Error filtering products');
+    }
+};
+
+
+module.exports = { filterProducts, displayAdminProductsPage, displayCustomerProductsPage, addNewProduct, updateProduct, getProductById, deleteImage, deleteProduct };

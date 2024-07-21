@@ -22,12 +22,11 @@ const displayProductDetails = async (req, res) => {
             review.userName = userNames[review.userId];
         });
 
-
-
         res.render('index.ejs', {
             content: 'product_details_page',
             product: productData,
-            reviews: reviews
+            reviews: reviews,
+            user: req.session.user,
         });
     } catch (error) {
         console.error("Error fetching product details: ", error);

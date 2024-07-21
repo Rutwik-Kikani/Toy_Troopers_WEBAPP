@@ -1,3 +1,4 @@
+
 const getAbbreviation = (text) => {
     if (typeof text != 'string' || !text) {
         return '';
@@ -8,5 +9,6 @@ const getAbbreviation = (text) => {
         .toUpperCase();
     return acronym;
 };
+
 
 module.exports = { getAbbreviation };

@@ -6,6 +6,7 @@ const displayCategoriesPage = async (req, res) => {
         res.render('index', {
             content: 'category_page', // Assuming you have logic in index.ejs to handle this
             categories: categories,
+            user: req.session.user,
         });
     } catch (error) {
         console.error("Error adding category: ", error);

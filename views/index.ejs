@@ -9,33 +9,65 @@
 
   <body>
     <div class="super-container">
+      <!-- ------------------------------------------------------- -->
       <header class="header-container">
         <div class="logo">Logo of app</div>
+        <div class="auth-buttons">
+          <% if (user) { %>
+          <a href="/logout">Logout</a>
+          <% } else { %>
+          <a href="/login">Login</a>
+          <% } %>
+        </div>
       </header>
       <!-- ------------------------------------------------------- -->
       <div class="main-content">
         <div class="sidebar">
+          <% if (user) { %>
           <nav>
             <ul>
-              <li><a href="/category" class="<%= content === 'category_page' ? 'active' : '' %>">Category</a></li>
+              <% if (user.role === 'admin') { %>
               <li>
-                <a href="/products" class="<%= content === 'products_page' || content === 'product_details_page' ? 'active' : '' %>">
+                <a href="/category" class="<%= content === 'category_page' ? 'active' : '' %>">Category</a>
+              </li>
+              <li>
+                <a
+                  href="/products"
+                  class="<%= content === 'products_page' || content === 'product_details_page' ? 'active' : '' %>"
+                >
                   <%= content === 'product_details_page' ? 'Product' : 'Products' %>
                 </a>
               </li>
-              <li><a href="/users">User</a></li>
+              <% } else if (user.role === 'customer') { %>
+              <li>
+                <a
+                  href="/customer-products"
+                  class="<%= content === 'customer_products_page'|| content === 'product_details_page' ? 'active' : '' %>"
+                >
+                  <%= content === 'product_details_page' ? 'Product' : 'Products' %>
+                </a>
+              </li>
+              <li>
+                <a href="/my-cart" class="<%= content === 'my_cart' ? 'active' : '' %>">My Cart</a>
+              </li>
+              <% } %>
             </ul>
           </nav>
+          <% } %>
         </div>
 
         <div class="content">
-          <% if (content === 'category_page') { %> <%- include('category_page') %> <% } else if (content === 'products_page') { %> <%- include('products_page')
-          %> <% } else if (content === 'product_details_page') { %> <%- include('product_details_page') %> <% } else { %>
+          <% if (content === 'login_page') { %> <%- include('login_page') %> <% } else if (content === 'category_page')
+          { %> <%- include('category_page') %> <% } else if (content === 'products_page') { %> <%-
+          include('products_page') %> <% } else if (content === 'product_details_page') { %> <%-
+          include('product_details_page') %> <% } else if (content === 'customer_products_page') { %> <%-
+          include('customer_products_page') %> <% } else if (content === 'my_cart') { %> <%- include('my_cart') %> <% }
+          else { %>
           <p><%= content %></p>
           <% } %>
         </div>
       </div>
-      <!-- ------------------------------------------------------- -->
+
       <footer class="footer-container">
         <p>&copy; 2024 My App</p>
       </footer>
