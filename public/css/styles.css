@@ -51,7 +51,23 @@ body {
   overflow-y: auto;
   flex: auto;
 }
-/* ------------------------product-form / category-form / customer-filter-form ------------------------------ */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ensure the container takes the full height */
+  width: 100%;
+}
+
+/* ------------------------product-form / category-form / customer-filter-form / login-form------------------------------ */
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border: 2px solid var(--gray);
+  border-radius: 4px;
+}
 .customer-filter-form,
 .category-form,
 .product-form {
@@ -62,17 +78,20 @@ body {
   border-right: 2px solid var(--gray);
   overflow-y: auto; /* Enable vertical scrolling for the form */
 }
+.login-form .form-group,
 .customer-filter-form .form-group,
 .product-form .form-group,
 .category-form .form-group {
   margin-bottom: 1rem;
 }
+.login-container h1,
 .customer-filter-form h2,
 .product-form h2,
 .category-form h2 {
   margin-bottom: 1rem;
   color: var(--black);
 }
+.login-form label,
 .customer-filter-form label,
 .category-form label,
 .product-form label {
@@ -81,6 +100,7 @@ body {
   color: var(--black);
   font-weight: bold;
 }
+.login-form input,
 .category-form input[type="text"],
 .category-form input[type="file"],
 .product-form input[type="text"],
@@ -98,6 +118,7 @@ body {
 .product-form textarea {
   height: 150px;
 }
+.login-form button,
 .customer-filter-form button,
 .category-form button,
 .product-form button {
@@ -111,6 +132,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.login-form button:hover,
 .customer-filter-form button:hover,
 .category-form button:hover,
 .product-form button:hover {
@@ -121,9 +143,9 @@ body {
   color: white;
   border: none;
   cursor: pointer;
-  margin-top: 5px; /* Add some space between image and button */
-  padding: 5px 10px; /* Add some padding for better appearance */
-  border-radius: 4px; /* Optional: rounded corners */
+  margin-top: 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
 }
 .imagePreviewContainer {
   display: flex;
@@ -146,6 +168,7 @@ body {
   display: block;
   margin: 0 auto; /* Center the image */
 }
+
 /* --------------------------- product list container ------------------------ */
 .products-list-container {
   flex: 1 1 70%; /* Allow list container to grow and take the remaining 70% */
@@ -208,6 +231,7 @@ body {
 .product-item button:hover {
   background-color: var(--gray);
 }
+
 /* ------------------------------ category list container ---------------------------------------- */
 .category-list {
   flex: 1 1 70%; /* Allow list container to grow and take the remaining 70% */
@@ -260,7 +284,6 @@ body {
 }
 
 /* ---------------------------------------------------------------------- */
-
 .sidebar ul {
   list-style-type: none;
   margin: 0;
@@ -281,6 +304,7 @@ body {
   background-color: var(--gray);
   color: var(--white);
 }
+
 /* ---------------------------------------------------------------------- */
 .footer-container {
   background-color: var(--gray);

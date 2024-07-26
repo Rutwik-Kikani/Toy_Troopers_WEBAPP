@@ -5,6 +5,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const categoryController = require('../controllers/categoryController');
 const productsController = require('../controllers/productsController');
 const productDetailController = require('../controllers/productDetailController');
+const cartController = require('../controllers/cartController');
 const { checkAuth, checkAdmin, checkCustomer, login, logout } = require('../controllers/authController');
 
 
@@ -39,4 +40,9 @@ router.get('/product-details/:productId', checkAuth, productDetailController.dis
 router.get('/customer-products', checkAuth, checkCustomer, productsController.displayCustomerProductsPage);
 router.post('/customer-products', checkAuth, checkCustomer, productsController.filterProducts);
 
+
+router.get('/my-cart', checkAuth, cartController.displayCartPage);
+router.post('/add-to-cart', checkAuth, cartController.addToCart);
+router.post('/update-cart-quantity', checkAuth, cartController.updateCartQuantity);
+router.post('/remove-from-cart', checkAuth, cartController.removeFromCart);
 module.exports = router;

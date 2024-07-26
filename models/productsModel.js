@@ -19,11 +19,23 @@ const getAllProducts = async () => {
         ...products[key]
     })) : [];
 };
+
 const getProductById = async (productId) => {
     const snapshot = await db.ref(`products/${productId}`).once('value');
     const product = snapshot.val();
     return product ? { id: productId, ...product } : null;
 };
+
+const getProductsByIds = async (productIds) => {
+    const productPromises = productIds.map(productId => db.ref(`products/${productId}`).once('value'));
+    const productSnapshots = await Promise.all(productPromises);
+    const products = productSnapshots.map(snapshot => {
+        const product = snapshot.val();
+        return product ? { id: snapshot.key, ...product } : null;
+    });
+    return products.filter(product => product !== null);
+};
+
 const addProduct = async (productData, imageFiles) => {
     const { name, description, price, categoryId, stockQuantity } = productData;
     let imageUrls = {};
@@ -187,4 +199,4 @@ const filterProducts = async (categoryId, minPrice, maxPrice, minRating) => {
     return filteredProducts;
 };
 
-module.exports = { filterProducts, getAllProducts, addProduct, getProductById, updateProduct, deleteImage, deleteProduct, uploadImage };
+module.exports = { getProductsByIds, filterProducts, getAllProducts, addProduct, getProductById, updateProduct, deleteImage, deleteProduct, uploadImage };

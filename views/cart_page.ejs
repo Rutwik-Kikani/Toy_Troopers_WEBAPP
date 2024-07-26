@@ -1,0 +1,67 @@
+<div class="cart-container">
+  <h2>My Cart</h2>
+  <% if (cart && cart.length > 0) { %>
+  <ul>
+    <% cart.forEach(function(item) { %>
+    <li>
+      <img src="<%= item.imageUrl %>" alt="<%= item.productName %>" style="width: 100px; height: 100px" />
+      <p><strong>Product:</strong> <%= item.productName %></p>
+      <p><strong>Quantity:</strong> <%= item.quantity %></p>
+      <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p>
+      <button onclick="updateQuantity('<%= item.productId %>', 'increase')">+</button>
+      <button onclick="updateQuantity('<%= item.productId %>', 'decrease')">-</button>
+      <button onclick="removeFromCart('<%= item.productId %>')">Remove</button>
+    </li>
+    <% }); %>
+  </ul>
+  <p><strong>Total Price:</strong> $<%= totalPrice.toFixed(2) %></p>
+  <p><strong>Total Price with Tax (13%):</strong> $<%= (totalPrice * 1.13).toFixed(2) %></p>
+  <button onclick="location.href='/checkout'">Place Order</button>
+  <% } else { %>
+  <p>Your cart is empty.</p>
+  <% } %>
+</div>
+
+<script>
+  function updateQuantity(productId, action) {
+    fetch("/update-cart-quantity", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ productId: productId, action: action })
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          location.reload();
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating cart quantity:", error);
+      });
+  }
+
+  function removeFromCart(productId) {
+    fetch("/remove-from-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ productId: productId })
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          location.reload();
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error removing from cart:", error);
+      });
+  }
+</script>

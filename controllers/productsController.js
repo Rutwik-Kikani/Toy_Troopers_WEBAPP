@@ -11,6 +11,7 @@ const displayProductsPage = async (req, res, contentType) => {
             products: products,
             categories: categories,
             user: req.session.user,
+            filter: {},
         });
     } catch (error) {
         console.error("Error fetching data: ", error);
@@ -122,6 +123,7 @@ const filterProducts = async (req, res) => {
             products: filteredProducts,
             categories: await categoryModel.getAllCategories(),
             user: req.session.user,
+            filter: { categoryId, priceRange, rating },
         });
     } catch (error) {
         console.error("Error filtering products: ", error);

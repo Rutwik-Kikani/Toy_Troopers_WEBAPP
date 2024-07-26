@@ -48,7 +48,7 @@
                 </a>
               </li>
               <li>
-                <a href="/my-cart" class="<%= content === 'my_cart' ? 'active' : '' %>">My Cart</a>
+                <a href="/my-cart" class="<%= content === 'cart_page' ? 'active' : '' %>">My Cart</a>
               </li>
               <% } %>
             </ul>
@@ -61,8 +61,8 @@
           { %> <%- include('category_page') %> <% } else if (content === 'products_page') { %> <%-
           include('products_page') %> <% } else if (content === 'product_details_page') { %> <%-
           include('product_details_page') %> <% } else if (content === 'customer_products_page') { %> <%-
-          include('customer_products_page') %> <% } else if (content === 'my_cart') { %> <%- include('my_cart') %> <% }
-          else { %>
+          include('customer_products_page') %> <% } else if (content === 'cart_page') { %> <%- include('cart_page') %>
+          <% } else { %>
           <p><%= content %></p>
           <% } %>
         </div>
